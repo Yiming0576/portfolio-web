@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { HashLink } from 'react-router-hash-link';
-import { BrowserRouter as Router } from "react-router-dom";
-import logo from '../assets/img/logo.svg';
-import navIcon1 from '../assets/img/nav-icon1.svg';
-import navIcon2 from '../assets/img/nav-icon2.svg';
-import navIcon3 from '../assets/img/nav-icon3.svg';
+import { Link } from 'react-router-dom';
+import logo from "../assets/images/logo.svg";
+import navIconlinkedin from "../assets/images/nav-icon1-lin.svg";
+import navIconInstgram from "../assets/images/nav-icon-ins.svg";
+import navIconGithub from "../assets/images/nav-icon-git.svg";
 
 export const NavBar = () => {
   const [activeLink, setActiveLink] = useState('home');
@@ -29,54 +28,40 @@ export const NavBar = () => {
   }
 
   return (
-    <Router>
-      <nav className={`fixed w-full top-0 bg-white shadow-lg ${scrolled ? "scrolled" : ""}`}>
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between py-4">
-            <div>
-              <a href="/" className="flex items-center">
-                <img src={logo} alt="Logo" className="h-8" />
-              </a>
+    <nav className={`fixed w-full top-0 bg- shadow-lg ${scrolled ? "scrolled" : ""}`}>
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between py-4">
+          <div>
+            <a href="/" className="flex items-center">
+              <img src={logo} alt="Logo" className="h-8" />
+            </a>
+          </div>
+          <div className="flex items-center">
+            <div className="hidden md:flex space-x-4">
+              <Link to="#home" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('home')}  >Home</Link>
+              <Link to="#skills" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'}  onClick={() => onUpdateActiveLink('skills')}>Skills</Link>
+              <Link to="#projects" className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'} onClick={() => onUpdateActiveLink('projects')}>Projects</Link>
+              
             </div>
-            <div className="flex items-center">
-              <div className="hidden md:flex space-x-4">
-                <NavLink href="#home" active={activeLink === 'home'} onClick={() => onUpdateActiveLink('home')}>Home</NavLink>
-                <NavLink href="#skills" active={activeLink === 'skills'} onClick={() => onUpdateActiveLink('skills')}>Skills</NavLink>
-                <NavLink href="#projects" active={activeLink === 'projects'} onClick={() => onUpdateActiveLink('projects')}>Projects</NavLink>
-              </div>
-              <div className="flex items-center ml-4">
-                <a href="#" className="text-gray-700 hover:text-blue-500 px-2">
-                  <img src={navIcon1} alt="" className="h-6" />
-                </a>
-                <a href="#" className="text-gray-700 hover:text-blue-500 px-2">
-                  <img src={navIcon2} alt="" className="h-6" />
-                </a>
-                <a href="#" className="text-gray-700 hover:text-blue-500 px-2">
-                  <img src={navIcon3} alt="" className="h-6" />
-                </a>
-                <HashLink to='#connect'>
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-full ml-4 hover:bg-blue-600">
-                    <span className="font-medium">Let’s Connect</span>
-                  </button>
-                </HashLink>
-              </div>
+            <div className="flex items-center ml-4">
+              <a href="#" className="text-gray-700 hover:text-blue-500 px-2">
+                <img src={navIconlinkedin} alt="" className="h-6" />
+              </a>
+              <a href="#" className="text-gray-700 hover:text-blue-500 px-2">
+                <img src={navIconGithub} alt="" className="h-6" />
+              </a>
+              <a href="#" className="text-gray-700 hover:text-blue-500 px-2">
+                <img src={navIconInstgram} alt="" className="h-6" />
+              </a>
+              <Link to='#connect'>
+                <button className="bg-blue-500 text-white px-4 py-2 rounded-full ml-4 hover:bg-blue-600">
+                  <span className="font-medium">Let’s Connect</span>
+                </button>
+              </Link>
             </div>
           </div>
         </div>
-      </nav>
-    </Router>
+      </div>
+    </nav>
   )
 }
-
-// NavLink component to handle navigation links
-const NavLink = ({ href, active, onClick, children }: { href: string, active: boolean, onClick: () => void, children: React.ReactNode }) => {
-  return (
-    <a
-      href={href}
-      className={`text-gray-700 hover:text-blue-500 px-3 py-2 ${active ? 'font-semibold' : ''}`}
-      onClick={onClick}
-    >
-      {children}
-    </a>
-  );
-};
